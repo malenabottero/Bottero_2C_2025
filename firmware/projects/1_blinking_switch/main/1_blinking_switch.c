@@ -37,7 +37,7 @@ void app_main(void){
     	teclas  = SwitchesRead();
     	switch(teclas){
     		case SWITCH_1:
-    			LedToggle(LED_1);
+    			LedToggle(LED_1); //cambia el estado en el esta, si est prendido la apaga o viceversa
     		break;
     		case SWITCH_2:
     			LedToggle(LED_2);

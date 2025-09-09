@@ -6,5 +6,5 @@ list(APPEND EXTRA_COMPONENT_DIRS "../../drivers")
 
 include_directories(${PROJECT_NAME} ../../drivers)
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(template)
+project(guia1_ej4)
 # The project name has been changed from '3_blinking_timer' to 'x_template
