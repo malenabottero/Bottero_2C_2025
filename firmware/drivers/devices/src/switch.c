@@ -37,7 +37,7 @@ int8_t SwitchesInit(void){
 
 int8_t SwitchesRead(void){
 	int8_t mask = 0;
-	if (!GPIORead(GPIO_SWITCH1))
+	if (!GPIORead(GPIO_SWITCH1))// GPIORead devuelve 0 si la tecla esta presionada
 		  mask |= SWITCH_1;
 	if (!GPIORead(GPIO_SWITCH2))
 		  mask |= SWITCH_2;

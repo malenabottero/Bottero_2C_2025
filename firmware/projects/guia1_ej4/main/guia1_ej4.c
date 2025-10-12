@@ -17,9 +17,9 @@
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 12/09/2025| Document creation		                         |
  *
- * @author Bottero malena
+ * @author Bottero malena/
  *
  */
 
@@ -58,7 +58,7 @@ void convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number)
 
 	for (int i = digits - 1; i >= 0; i--)
 	{
-		bcd_number[i] = data % 10;
+		bcd_number[i] = data % 10;// si tengo 125%10 me quede con el resto que es 5
 		data = data / 10;
 		printf("%d\n", bcd_number[i]);
 	}

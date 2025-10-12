@@ -39,11 +39,12 @@
 
 /*==================[external functions definition]==========================*/
 void app_main(void){
-uint8_t teclas; //guardar teclas
+uint8_t teclas; //guardar teclas  
 	LedsInit(); //inicializar
 	SwitchesInit();
     while(1)    {
-    	teclas  = SwitchesRead(); 
+    	teclas  = SwitchesRead();//lee el estado de las teclas
+		//si se presiona una tecla, se enciende el led correspondiente	
     	switch(teclas){
     		case SWITCH_1: 
     			LedToggle(LED_1); //Enciende/apaga LED 1 si se presiona SWITCH 1.

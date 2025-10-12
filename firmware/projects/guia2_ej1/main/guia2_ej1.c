@@ -27,7 +27,7 @@
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 12/09/2025 | Document creation		                         |
  *
  * @author malena bottero (malena.bottero8@ingenieria.edu.ar)
  *
@@ -64,21 +64,21 @@ TaskHandle_t lcd_task_handle = NULL;
  *
  * @param pvParameter No se utiliza en esta implementación.
  */
-static void KeyTask(void *pvParameter)
+static void KeyTask(void *pvParameter) //lee los switches (TEC1/TEC2) y actualiza toggle y hold.
 {
 	while (true)
 	{
 		uint8_t teclas;
 		teclas = SwitchesRead();
-		if (teclas == SWITCH_1)
+		if (teclas == SWITCH_1)//Si tocás TEC1, SwitchesRead() devuelve 1 → entra al primer if → toggle cambia de false a true o viceversa.
 		{
 			toggle = !toggle;
 			LedOff(LED_1);
 			LedOff(LED_2);
 			LedOff(LED_3);
 		}
-			
-		if (teclas == SWITCH_2)
+
+		if (teclas == SWITCH_2)//Si tocás TEC2, SwitchesRead() devuelve 2 → entra al segundo if → hold cambia de false a true o viceversa.
 		{
 			hold = !hold;
 		}
@@ -96,6 +96,7 @@ static void KeyTask(void *pvParameter)
  * @return Ninguno
  */
 static void MeasureTask(void *pvParameter)  //encargada de medir la distancia
+//mide distancia con HC-SR04 si toggle == true.
 {
 	while (true)
 	{
@@ -120,7 +121,7 @@ static void MeasureTask(void *pvParameter)  //encargada de medir la distancia
  * @param pvParameter Un puntero a void que no se utiliza dentro de la función.
  * @return Ninguno
  */
-static void LedsTask(void *pvParameter)
+static void LedsTask(void *pvParameter)//enciende/apaga LEDs según el valor de distance
 {
 	while (true)
 	{
@@ -149,7 +150,7 @@ static void LedsTask(void *pvParameter)
 			LedOn(LED_2);
 			LedOn(LED_3);
 		}
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
+		vTaskDelay(1000 / portTICK_PERIOD_MS);//cada 1 segundo actualiza el estado de los leds
 	}
 }
 /**
@@ -161,7 +162,7 @@ static void LedsTask(void *pvParameter)
  * 
  * @return Ninguno
  */
-static void LCDTask(void *pvParameter)
+static void LCDTask(void *pvParameter)//escribe la distancia en la LCD (respetando toggle y hold)
 {
 	while (true)
 	{

@@ -55,7 +55,7 @@ TaskHandle_t lcd_task_handle = NULL;
  * @brief Función invocada en la interrupción del timer measure
  */
 
-void FuncTimerMeasure(void *param)
+void FuncTimerMeasure(void *param) // Se llama cuando Timer A se dispara (1 s).
 {
 	vTaskNotifyGiveFromISR(measure_task_handle, pdFALSE); /* Envía una notificación a la tarea asociada */
 }
@@ -63,7 +63,7 @@ void FuncTimerMeasure(void *param)
  * @brief Función invocada en la interrupción del timer LCD
  */
 
-void FuncTimerLCD(void *param)
+void FuncTimerLCD(void *param) //Se llama cuando Timer B se dispara.
 {
 	vTaskNotifyGiveFromISR(lcd_task_handle, pdFALSE); /* Envía una notificación a la tarea asociada  */
 
@@ -89,7 +89,7 @@ static void MeasureTask(void *pvParameter)
 {
 	while (true)
 	{
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);//la tarea duerme hasta recibir una notificación de Timer A.
 		if (toggle)
 			distance = HcSr04ReadDistanceInCentimeters();
 	}
@@ -246,7 +246,7 @@ void app_main(void)
 		.param_p = NULL};
 	UartInit(&my_uart);
 
-	SwitchActivInt(SWITCH_1, Key1, NULL);
+	SwitchActivInt(SWITCH_1, Key1, NULL);//interruciones 
 	SwitchActivInt(SWITCH_2, Key2, NULL);
 	xTaskCreate(&LedsTask, "LED_2", 512, NULL, 5, &leds_task_handle);
 	xTaskCreate(&MeasureTask, "LED_2", 512, NULL, 5, &measure_task_handle);

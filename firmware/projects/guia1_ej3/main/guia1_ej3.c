@@ -95,9 +95,10 @@ void control_led(struct leds *ledptr)
 				break;
 			}
 			for (int j = 0; j < (ledptr->periodo / CONFIG_BLINK_PERIOD); j++)
-				vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);
-		}
-	}
+				vTaskDelay(CONFIG_BLINK_PERIOD / portTICK_PERIOD_MS);//100 ms 
+		}// lo hace en 5 bloques de 100 ms cada uno 
+	}//Al usar pequeños pasos de 100 ms, el sistema puede atender otras tareas entre medio
+	//evitando bloqueos la cpu demasiado tiempo
 	
 };
 /*==================[external functions definition]==========================*/
